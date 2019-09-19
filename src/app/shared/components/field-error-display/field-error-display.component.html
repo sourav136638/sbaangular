@@ -1,0 +1,9 @@
+<!-- <div *ngIf="displayError" class="alert alert-danger">
+    <div *ngIf="errorMsg">
+      <span class="alert-heading font-weight-bold"><i class="fa fa-warning"></i> Warning! </span>
+      {{errorMsg}}
+    </div>
+</div> -->
+<ng-container *ngIf="displayError && errorMsg">
+  <span class="error">{{errorMsg}}</span>
+</ng-container>

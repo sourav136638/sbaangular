@@ -1,0 +1,17 @@
+<div class="custom-dialog" [ngClass]="{'info': mode=='SUCCESS','warn': mode=='ERROR'}">
+  <h2 mat-dialog-title class="dialog-title" [ngClass]="{'info': mode=='SUCCESS','warn': mode=='ERROR'}">
+    {{modalTitle}}
+  </h2>
+  <mat-dialog-content class="dialog-content">
+    <div class="popup-icon" [ngClass]="{'info': mode=='SUCCESS','warn': mode=='ERROR'}">
+      <i class="fa fa-check-circle-o" *ngIf="mode=='SUCCESS'"></i>
+      <i class="fa fa-exclamation-triangle" *ngIf="mode=='ERROR'"></i>
+    </div>
+    <p>
+      {{modalMessage}}
+    </p>
+  </mat-dialog-content>  
+  <div class="dialog-action">
+    <button mat-raised-button class="btn btn-primary" [mat-dialog-close]="true">Ok</button>
+  </div>
+</div>

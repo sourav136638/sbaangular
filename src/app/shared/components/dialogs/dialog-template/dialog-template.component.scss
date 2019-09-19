@@ -1,0 +1,38 @@
+.custom-dialog {
+  text-align: center;
+  margin: -16px;
+  overflow: hidden;
+  padding: 10px 12px 25px 12px;
+  &.info {
+    background: #F1F8E9;
+  }
+  &.warn {
+    background: #FFEBEE;
+  }
+}
+
+.dialog-title {
+  font-weight: bold;
+  text-align: center;
+  color: green;
+  &.info {
+    color: green;
+  }
+  &.warn {
+    color: red;
+  }
+}
+
+.dialog-content, .dialog-action {
+  text-align: center;
+}
+
+.popup-icon {
+  font-size: 60px;
+  &.info {
+    color: green;
+  }
+  &.warn {
+    color: red;
+  }
+}
