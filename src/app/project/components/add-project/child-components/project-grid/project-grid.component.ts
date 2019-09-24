@@ -1,35 +1,32 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { UserModel } from 'src/app/shared/models/user.model';
-import { UserService } from 'src/app/project/services/user.service';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
-import { DialogUtilService } from 'src/app/shared/components/dialogs/dialog-util.service';
-import { DIALOG_MODE } from 'src/app/shared/constants/app-constant';
-import { MESSAGE } from 'src/app/shared/constants/message-constants';
+import { ProjectModel } from 'src/app/shared/models/project.model';
+import { ProjectService } from 'src/app/project/services/project.service';
 
 @Component({
-  selector: 'app-user-grid',
-  templateUrl: './user-grid.component.html',
-  styleUrls: ['./user-grid.component.scss']
+  selector: 'app-project-grid',
+  templateUrl: './project-grid.component.html',
+  styleUrls: ['./project-grid.component.scss']
 })
-export class UserGridComponent implements OnInit {
+export class ProjectGridComponent implements OnInit {
 
   subscriptions: Subscription[] = [];
   displayedColumns: string[];
-  dataSource: MatTableDataSource<UserModel>;
-  //displayedColumns: string[] = ['firstName', 'lastName', 'empId'];
+  dataSource: MatTableDataSource<ProjectModel>;
   pageLength: number;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private userService:UserService,private router: Router,
-    private dialogUtilService: DialogUtilService) {
+  constructor(private projectService:ProjectService,private router: Router) {
     this.displayedColumns = [
-      'firstName',
-      'lastName',
-      'empId',
+      'project',
+      'noOfTask',
+      'startDate',
+      'endDate',
+      'completed',
       'action'
     ];
 
@@ -37,9 +34,9 @@ export class UserGridComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.userService.userListDataSubject.asObservable().subscribe((data) => {
-      console.log("From Grid Component", data);
-      this.dataSource.data = data;
+    this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
+      // console.log("From Grid Component", data);
+     // this.dataSource.data = data;
       this.pageLength = data.length;
       this.goToFirstPage();
     }));
@@ -64,18 +61,21 @@ export class UserGridComponent implements OnInit {
     }
   }
 
-  editUser(element: UserModel) {
-    this.router.navigate(['project/editUser', element]);
+  editProject(element: ProjectModel) {
+    this.router.navigate(['project/editProject', element]);
   }
 
-  deleteUser(element: UserModel) {
+  deleteProject(element: ProjectModel) {
     // this.dialogUtilService.openModal(DIALOG_MODE.WARNING, MESSAGE.USER_DELETE_CONFRIM, () => {
     //   //confirmed
     //   //console.log('Yes');
     //   this.userService.deleteUser(element.userId);
     // });
-    this.userService.deleteUser(element.userId);
-
+    this.projectService.deleteProject(element.projectId);
   }
+
+suspendProject(element: ProjectModel){
+  this.projectService.deleteProject(element.projectId);
+}
 
 }

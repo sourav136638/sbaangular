@@ -3,10 +3,10 @@ export interface TaskApiModel {
     task: string,
     startDate: string,
     endDate: string,
-    priority: number,
+    priority: string,
     status: string,
-    projectId: number,
-    parentId: number,
+    projectId: string,
+    parentId: string,
     userId: string,
     parentTask: string,
     parent: boolean

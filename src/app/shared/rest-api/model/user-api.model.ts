@@ -1,6 +1,8 @@
 export interface UserApiModel{
-    firstName: string,
-    lastName:string,
-    empId: number,
-    userId:number
+    firstname: string,
+    lastname:string,
+    employeeId: string,
+    userId:string,
+    taskId:string,
+    projectId:string
 }

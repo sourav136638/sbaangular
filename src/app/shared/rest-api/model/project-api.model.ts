@@ -1,8 +1,8 @@
 export interface ProjectApiModel {
     projectId: string,
     project: string,
-    startdate: string,
-    enddate: string,
+    startDate: string,
+    endDate: string,
     priority: number,
     managerId: string,
     completed: string

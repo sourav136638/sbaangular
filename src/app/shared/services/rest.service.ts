@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CommonUtilsService } from '../util/common-utils.service';
+import { REST_API_PATHS } from '../constants/app-constant';
+import { String } from 'typescript-string-operations';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +12,11 @@ import { Observable } from 'rxjs';
 export class RestService {
 
   constructor(public http: HttpClient) { }
+
+  getApiPath(urlKey: string,...urlParam: string[]){
+    let apiObj = CommonUtilsService.copyJSON(REST_API_PATHS);    
+    return _.extend(apiObj[urlKey],{rest: String.Format(apiObj[urlKey]["rest"], ...urlParam)});
+  }
 
   getUrl(urlObj: any): any {
     const _url: string = urlObj.rest;

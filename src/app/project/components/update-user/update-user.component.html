@@ -1,0 +1,45 @@
+<div class="container">
+    <form [formGroup]="addUserForm" (ngSubmit)="submit()" autocomplete="off">
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="firstName" class="required col-12">First Name:</label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" id="firstName" formControlName="firstName"
+                    [ngClass]="{'is-invalid': isFieldValid(firstName)}" />
+                <app-field-error-display [displayError]="isErrorExists(firstName, 'required')"
+                    errorMsg="First Name is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="lastName" class="required col-12">Last Name:</label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" id="lastName" formControlName="lastName"
+                    [ngClass]="{'is-invalid': isFieldValid(lastName)}" />
+                <app-field-error-display [displayError]="isErrorExists(lastName, 'required')"
+                    errorMsg="Last Name is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="empId" class="required col-12">Employee Id:</label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" id="empId" formControlName="empId" type="number"
+                    [ngClass]="{'is-invalid': isFieldValid(empId)}" />
+                <app-field-error-display [displayError]="isErrorExists(empId, 'required')"
+                    errorMsg="Employee Id is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 text-right">
+                <button type="submit" class="btn btn-primary mt-2">Update User</button>
+            </div>
+        </div>
+    </form>
+</div>

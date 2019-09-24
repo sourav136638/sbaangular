@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import FormUtils from 'src/app/shared/util/form-utils';
-import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from '../../services/user.service';
+import { UserModel } from 'src/app/shared/models/user.model';
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.scss']
+  selector: 'app-update-user',
+  templateUrl: './update-user.component.html',
+  styleUrls: ['./update-user.component.scss']
 })
-export class AddUserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit {
 
   addUserForm: FormGroup;
   markAsTouched = FormUtils.markAsTouched;
@@ -19,9 +19,9 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.addUserForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      employeeId: ['', Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      empId: ['', Validators.required]
     });
   }
 
@@ -32,15 +32,11 @@ export class AddUserComponent implements OnInit {
   submit() {
     if (this.addUserForm.valid) {
       let userModel: UserModel = this.addUserForm.value;
-      this.userService.createUser(userModel);
+      this.userService.updateUser(userModel);
       console.log('User', this.addUserForm.value)
     } else {
       this.markAsTouched(this.addUserForm);
     }
-  }
-
-  resetUser(){
-    this.addUserForm.reset();
   }
 
 }

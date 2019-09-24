@@ -1,0 +1,15 @@
+<div class="container">
+    <form [formGroup]="addTaskForm" (ngSubmit)="submit()" autocomplete="off">
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="task" class="required col-12">Task:</label>
+            </div>
+            <div class="col-9 ">
+                <input class="form-control" id="task" formControlName="task"
+                    [ngClass]="{'is-invalid': isFieldValid(task)}" />
+                <app-field-error-display [displayError]="isErrorExists(task, 'required')" errorMsg="Task is required">
+                </app-field-error-display>
+            </div>
+        </div>
+    </form>
+</div>

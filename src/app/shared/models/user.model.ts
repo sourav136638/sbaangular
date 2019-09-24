@@ -1,5 +1,8 @@
-export interface UserModel{
-    firstName: string;
-    lastName:string;
-    empId: number
+export interface UserModel {
+    firstname: string,
+    lastname: string,
+    employeeId: string,
+    userId: string,
 }
+
+

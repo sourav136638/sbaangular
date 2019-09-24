@@ -1,1 +1,115 @@
-<p>add-task works!</p>
+<div class="container">
+    <form [formGroup]="addTaskForm" (ngSubmit)="submit()" autocomplete="off">
+        <div class="row mt-2">
+            <div class="col-5 text-right">
+                <input type="checkbox" id="parent" formControlName="parent" class="custom-control-input" data-md-icheck
+                    (change)="toggleVisibility($event)">
+                <label class="custom-control-label" for="parent">Parent Task</label>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="task" class="required col-12">Task:</label>
+            </div>
+            <div class="col-9 ">
+                <input class="form-control" id="task" formControlName="task"
+                    [ngClass]="{'is-invalid': isFieldValid(task)}" />
+                <app-field-error-display [displayError]="isErrorExists(task, 'required')" errorMsg="Task is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="projectId" class="required col-12">Project:</label>
+            </div>
+            <div class="col-9 ">
+                <select class="custom-select" id="projectId" formControlName="projectId"
+                    [ngClass]="{'is-invalid': isFieldValid(projectId)}">
+                    <option *ngFor="let project of projectNames" [value]="project.id">
+                        {{project.value}}</option>
+                </select>
+            </div>
+            <app-field-error-display [displayError]="isErrorExists(projectId, 'required')"
+                errorMsg="Project Name is required">
+            </app-field-error-display>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="priority" class="required col-12">Priority:</label>
+            </div>
+            <div class="col-9 ">
+                <mat-slider id="priority" formControlName="priority" [ngClass]="{'is-invalid': isFieldValid(priority)}"
+                    thumbLabel [displayWith]="formatLabel" tickInterval="3" min="1" max="30" value="">
+                </mat-slider>
+                <app-field-error-display [displayError]="isErrorExists(priority, 'required')"
+                    errorMsg="Priority is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="parentTask" class="required col-12">Parent Task:</label>
+            </div>
+            <div class="col-9 ">
+                <select class="custom-select" id="parentTask" formControlName="parentTask"
+                    [ngClass]="{'is-invalid': isFieldValid(parentTask)}">
+                    <option *ngFor="let parentTask of parentTasks" [value]="parentTask.id">
+                        {{parentTask.value}}</option>
+                </select>
+                <app-field-error-display [displayError]="isErrorExists(parentTask, 'required')"
+                    errorMsg="Parent Task is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="startDate" class="required col-12">Start Date:</label>
+            </div>
+            <div class="col-3 ">
+                <!-- <input matInput [matDatepicker]="picker" class="form-control" id="startDate" formControlName="startDate"
+                    [ngClass]="{'is-invalid': isFieldValid(startDate)}">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker> -->
+
+                <input class="form-control" id="startDate" formControlName="startDate"
+                    [ngClass]="{'is-invalid': isFieldValid(priority)}" placeholder="ex: 24-sep-2019" />
+                <app-field-error-display [displayError]="isErrorExists(startDate, 'required')"
+                    errorMsg="Start Date is required">
+                </app-field-error-display>
+            </div>
+            <div class="col-3 text-right">
+                <label for="endDate" class="required col-12">End Date:</label>
+            </div>
+            <div class="col-3 ">
+
+                <input class="form-control" id="endDate" formControlName="endDate"
+                    [ngClass]="{'is-invalid': isFieldValid(endDate)}" placeholder="ex: 24-sep-2019" />
+                <app-field-error-display [displayError]="isErrorExists(endDate, 'required')"
+                    errorMsg="End Date is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-3 text-right">
+                <label for="userId" class="required col-12">User:</label>
+            </div>
+            <div class="col-9 ">
+                <select class="custom-select" id="userId" formControlName="userId"
+                    [ngClass]="{'is-invalid': isFieldValid(userId)}">
+                    <option *ngFor="let user of users" [value]="user.id">
+                        {{user.value}}</option>
+                </select>
+                <app-field-error-display [displayError]="isErrorExists(userId, 'required')" errorMsg="User is required">
+                </app-field-error-display>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-5 text-right">
+                <button type="submit" class="btn btn-primary mt-2">Add Task</button>
+            </div>
+            <div class="col-7">
+                <button (click)="resetTask()" class="btn btn-primary mt-2">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>

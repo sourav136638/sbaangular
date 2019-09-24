@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectModel } from 'src/app/shared/models/project.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import FormUtils from 'src/app/shared/util/form-utils';
-import { ProjectModel } from 'src/app/shared/models/project.model';
 import { ProjectService } from '../../services/project.service';
 
 @Component({
-  selector: 'app-add-project',
-  templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.scss']
+  selector: 'app-update-project',
+  templateUrl: './update-project.component.html',
+  styleUrls: ['./update-project.component.scss']
 })
-export class AddProjectComponent implements OnInit {
+export class UpdateProjectComponent implements OnInit {
 
   addProjectForm: FormGroup;
 
@@ -43,15 +43,11 @@ export class AddProjectComponent implements OnInit {
   submit() {
     if (this.addProjectForm.valid) {
       let projectModel: ProjectModel = this.addProjectForm.value;
-      this.projectService.createProject(projectModel);
+      this.projectService.updateProject(projectModel);
       console.log('User', this.addProjectForm.value)
     } else {
       this.markAsTouched(this.addProjectForm);
     }
-  }
-
-  resetProject(){
-    this.addProjectForm.reset();
   }
 
 }
