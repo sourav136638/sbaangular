@@ -11,7 +11,8 @@ export class ProjectModelTransformer {
             endDate: projectModel.endDate,
             priority: projectModel.priority,
             managerId: projectModel.managerId,
-            completed: projectModel.completed
+            completed: projectModel.completed,
+            noOfTask: projectModel.noOfTask
         }
 
         return userManagementApiModel;
@@ -25,7 +26,8 @@ export class ProjectModelTransformer {
             endDate: projectModel.endDate,
             priority: projectModel.priority,
             managerId: projectModel.managerId,
-            completed: projectModel.completed
+            completed: projectModel.completed,
+            noOfTask: projectModel.noOfTask
         }
 
         return projectApiModel;

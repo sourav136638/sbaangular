@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import FormUtils from 'src/app/shared/util/form-utils';
 import { TaskModel } from 'src/app/shared/models/task.model';
 import { TaskService } from '../../services/task.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -12,9 +12,12 @@ import { Router } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
 
+  taskModel: TaskModel
+
   addTaskForm: FormGroup;
   marked = false;
-  isDisabled = false;
+  isvisibled = false;
+  visibled = true;
 
   markAsTouched = FormUtils.markAsTouched;
   isFieldValid = FormUtils.isFieldValid;
@@ -23,7 +26,7 @@ export class AddTaskComponent implements OnInit {
   projectNames: any[];
   parentTasks: any[];
   users: any[];
-  constructor(private formBuilder: FormBuilder,private taskService:TaskService,private route:Router) {
+  constructor(private formBuilder: FormBuilder, private taskService: TaskService, private route: Router, private router: ActivatedRoute) {
     this.users = [
       { "id": 1, "value": "Ram" }
     ];
@@ -35,14 +38,27 @@ export class AddTaskComponent implements OnInit {
     ]
   }
 
-  toggleVisibility(e){
-    this.marked= e.target.checked;
-    if(this.marked){
-      this.route.navigate['project/parentTask'];
-    }
+  changeTask(e) {
+    this.marked = e.target.checked;
+    // if (this.isvisibled == true) {
+    //   this.isvisibled = false;
+    // } else {
+    //   this.isvisibled = true;
+    // }
+    // if (this.visibled == false) {
+    //   this.visibled = true;
+    // } else {
+    //   this.visibled = false;
+    // }
   }
 
   ngOnInit() {
+
+    // this.router.data.subscribe((data) => {
+    //   this.taskModel = data.taskList;
+    //   console.log('list', this.taskModel);
+    // });
+
     this.addTaskForm = this.formBuilder.group({
       task: ["", Validators.required],
       startDate: ["", Validators.required],
@@ -55,13 +71,27 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
-  get taskName() { return this.addTaskForm.get('taskName'); }
-  get startDate() { return this.addTaskForm.get('startDate'); }
-  get endDate() { return this.addTaskForm.get('endDate'); }
-  get priority() { return this.addTaskForm.get('priority'); }
-  get projectId() { return this.addTaskForm.get('projectId'); }
-  get parentTask() { return this.addTaskForm.get('parentTask'); }
-  get parent() { return this.addTaskForm.get('parent'); }
+  // get taskName() { return this.addTaskForm.get('taskName'); }
+  // get startDate() { return this.addTaskForm.get('startDate'); }
+  // get endDate() { return this.addTaskForm.get('endDate'); }
+  // get priority() { return this.addTaskForm.get('priority'); }
+  // get projectId() { return this.addTaskForm.get('projectId'); }
+  // get parentTask() { return this.addTaskForm.get('parentTask'); }
+  // get parent() { return this.addTaskForm.get('parent'); }
+
+  // get verifyOption() { return this.addTaskForm.get('verifyOption'); }
+  // get verifierAction() { return this.addTaskForm.get('verifierAction'); }
+
+  // private showVerifyAction(status: boolean): void {
+  //   if (status) {
+  //     this.verifierAction.setValidators(Validators.required);
+  //   } else {
+  //     this.verifierAction.setValidators([]);
+  //   }
+  //   this.verifierAction.reset();
+  // }
+
+
 
   submit() {
     if (this.addTaskForm.valid) {
@@ -74,7 +104,7 @@ export class AddTaskComponent implements OnInit {
 
   }
 
-  resetTask(){
+  resetTask() {
     this.addTaskForm.reset();
   }
 

@@ -5,11 +5,11 @@ import FormUtils from 'src/app/shared/util/form-utils';
 import { TaskService } from 'src/app/project/services/task.service';
 
 @Component({
-  selector: 'app-parent-task',
-  templateUrl: './parent-task.component.html',
-  styleUrls: ['./parent-task.component.scss']
+  selector: 'app-add-normal-task',
+  templateUrl: './add-normal-task.component.html',
+  styleUrls: ['./add-normal-task.component.scss']
 })
-export class ParentTaskComponent implements OnInit {
+export class AddNormalTaskComponent implements OnInit {
 
   taskModel: TaskModel
 
@@ -23,14 +23,14 @@ export class ParentTaskComponent implements OnInit {
 
   ngOnInit() {
     this.addTaskForm = this.formBuilder.group({
-      task: ["", Validators.required],
-      startDate: ["null"],
-      endDate: ["null"],
-      priority: ["null"],
-      projectId: ["null"],
-      userId: ["null"],
-      parentTask: ["null"],
-      parent: ["true"]
+      task: ["null"],
+      startDate: ["", Validators.required],
+      endDate: ["", Validators.required],
+      priority: ["", Validators.required],
+      projectId: ["", Validators.required],
+      userId: ["", Validators.required],
+      parentTask: ["", Validators.required],
+      parent: ["false"]
     });
   }
 
@@ -48,5 +48,4 @@ export class ParentTaskComponent implements OnInit {
   resetTask() {
     this.addTaskForm.reset();
   }
-
 }

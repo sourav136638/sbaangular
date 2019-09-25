@@ -24,9 +24,11 @@ export class ViewTaskComponent implements OnInit {
 
   constructor(private userService:UserService,private router: Router) {
     this.displayedColumns = [
-      'firstName',
-      'lastName',
-      'empId',
+      'task',
+      'parent',
+      'startdate',
+      'enddate',
+      'priority',
       'action'
     ];
 
@@ -59,6 +61,14 @@ export class ViewTaskComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  editTask(element){
+
+  }
+  
+  deleteTask(element){
+
   }
 
 }

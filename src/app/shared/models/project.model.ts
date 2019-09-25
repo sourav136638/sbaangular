@@ -6,4 +6,5 @@ export interface ProjectModel {
     priority: number,
     managerId: string,
     completed: string
+    noOfTask: string
 }

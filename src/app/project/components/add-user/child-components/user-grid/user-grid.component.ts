@@ -3,7 +3,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/project/services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogUtilService } from 'src/app/shared/components/dialogs/dialog-util.service';
 import { DIALOG_MODE } from 'src/app/shared/constants/app-constant';
 import { MESSAGE } from 'src/app/shared/constants/message-constants';
@@ -15,6 +15,7 @@ import { MESSAGE } from 'src/app/shared/constants/message-constants';
 })
 export class UserGridComponent implements OnInit {
 
+  userModel:UserModel[];
   subscriptions: Subscription[] = [];
   displayedColumns: string[];
   dataSource: MatTableDataSource<UserModel>;
@@ -25,7 +26,7 @@ export class UserGridComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private userService:UserService,private router: Router,
-    private dialogUtilService: DialogUtilService) {
+    private dialogUtilService: DialogUtilService, private route: ActivatedRoute) {
     this.displayedColumns = [
       'firstName',
       'lastName',
@@ -43,6 +44,12 @@ export class UserGridComponent implements OnInit {
       this.pageLength = data.length;
       this.goToFirstPage();
     }));
+    // this.route.data.subscribe((data) => {
+    //   this.userModel = data.userList;
+    //   this.dataSource.data = data.userList;
+    //   console.log('list', this.userModel);
+    // });
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

@@ -1,46 +1,6 @@
-<form [formGroup]="addTaskForm" autocomplete="off">
-<div class="row mt-2">
-    <div class="col-5 text-right">
-        <input type="checkbox"  id="parent"  class="custom-control-input" data-md-icheck (change)="changeTask($event)">
-        <label class="custom-control-label" for="parent">Parent Task</label>
-    </div>
-</div>
-<div *ngIf="visibled">
-    <app-add-normal-task></app-add-normal-task>
-</div>
-
-<div *ngIf="marked">
-    <app-parent-task></app-parent-task>
-</div>
-</form>
-
-
-
-
-
-
-
-<!-- <div class="container">
+<div class="container">
     <form [formGroup]="addTaskForm" (ngSubmit)="submit()" autocomplete="off">
         <div class="row mt-2">
-            <div class="col-5 text-right">
-                <input type="checkbox" id="parent" formControlName="parent" class="custom-control-input" data-md-icheck
-                    (change)="toggleVisibility($event)">
-                <label class="custom-control-label" for="parent">Parent Task</label>
-            </div>
-        </div>
-        <div class="row mt-2" *ngIf="marked">
-            <div class="col-3 text-right">
-                <label for="task" class="required col-12">Task:</label>
-            </div>
-            <div class="col-9 ">
-                <input class="form-control" id="task" formControlName="task"
-                    [ngClass]="{'is-invalid': isFieldValid(task)}" />
-                <app-field-error-display [displayError]="isErrorExists(task, 'required')" errorMsg="Task is required">
-                </app-field-error-display>
-            </div>
-        </div>
-        <div class="row mt-2" *ngIf="visibled">
             <div class="col-3 text-right">
                 <label for="projectId" class="required col-12">Project:</label>
             </div>
@@ -55,7 +15,7 @@
                 errorMsg="Project Name is required">
             </app-field-error-display>
         </div>
-        <div class="row mt-2" *ngIf="visibled">
+        <div class="row mt-2">
             <div class="col-3 text-right">
                 <label for="priority" class="required col-12">Priority:</label>
             </div>
@@ -68,7 +28,7 @@
                 </app-field-error-display>
             </div>
         </div>
-        <div class="row mt-2" *ngIf="visibled">
+        <div class="row mt-2">
             <div class="col-3 text-right">
                 <label for="parentTask" class="required col-12">Parent Task:</label>
             </div>
@@ -83,12 +43,11 @@
                 </app-field-error-display>
             </div>
         </div>
-        <div class="row mt-2" *ngIf="visibled">
+        <div class="row mt-2">
             <div class="col-3 text-right">
                 <label for="startDate" class="required col-12">Start Date:</label>
             </div>
             <div class="col-3 ">
-                
                 <input class="form-control" id="startDate" formControlName="startDate"
                     [ngClass]="{'is-invalid': isFieldValid(priority)}" placeholder="ex: 24-sep-2019" />
                 <app-field-error-display [displayError]="isErrorExists(startDate, 'required')"
@@ -107,7 +66,7 @@
                 </app-field-error-display>
             </div>
         </div>
-        <div class="row mt-2" *ngIf="visibled">
+        <div class="row mt-2">
             <div class="col-3 text-right">
                 <label for="userId" class="required col-12">User:</label>
             </div>
@@ -130,4 +89,4 @@
             </div>
         </div>
     </form>
-</div> -->
+</div>

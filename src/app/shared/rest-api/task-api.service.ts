@@ -34,6 +34,8 @@ export class TaskApiService extends RestService {
     );
   }
 
+  taskList(){}
+
   createTask(TaskModel: TaskModel): Observable<TaskModel> {
     console.log("inside rest", TaskModelTransformer.createTaskModelTransformer(TaskModel))
     return this.post(this.getApiUrl(URLS.TASK_CREATE), TaskModelTransformer.createTaskModelTransformer(TaskModel), {});

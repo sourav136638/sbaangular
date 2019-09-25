@@ -23,7 +23,7 @@ export class ProjectGridComponent implements OnInit {
   constructor(private projectService:ProjectService,private router: Router) {
     this.displayedColumns = [
       'project',
-      'noOfTask',
+      //'noOfTask',
       'startDate',
       'endDate',
       'completed',

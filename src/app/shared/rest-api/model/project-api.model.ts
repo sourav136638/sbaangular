@@ -5,5 +5,6 @@ export interface ProjectApiModel {
     endDate: string,
     priority: number,
     managerId: string,
-    completed: string
+    completed: string,
+    noOfTask:string
 }

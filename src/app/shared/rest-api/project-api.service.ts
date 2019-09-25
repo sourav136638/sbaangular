@@ -25,10 +25,10 @@ export class ProjectApiService extends RestService {
     return this.getApiPath(urlKey,...urlParam);
   }
 
-  getProjectList(): Observable<IResponse<ProjectModel[]>> {
+  getProjectList(): Observable<any[]> {
     return this.get(this.getApiUrl(URLS.PROJECT_LIST), {}).pipe(
       map(responseJson => {
-        let response: IApiResponse<ProjectApiModel[]> = responseJson;
+        let response: ProjectModel[] = responseJson;
         return response;
       })
     );

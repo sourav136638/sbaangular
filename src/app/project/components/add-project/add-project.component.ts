@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import FormUtils from 'src/app/shared/util/form-utils';
 import { ProjectModel } from 'src/app/shared/models/project.model';
 import { ProjectService } from '../../services/project.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-project',
@@ -11,6 +12,7 @@ import { ProjectService } from '../../services/project.service';
 })
 export class AddProjectComponent implements OnInit {
 
+  projectModel: ProjectModel[];
   addProjectForm: FormGroup;
 
   markAsTouched = FormUtils.markAsTouched;
@@ -18,13 +20,19 @@ export class AddProjectComponent implements OnInit {
   isErrorExists = FormUtils.isErrorExists;
 
   managers: any[];
-  constructor(private formBuilder: FormBuilder,private projectService:ProjectService) {
+  constructor(private formBuilder: FormBuilder, private projectService: ProjectService, private route: ActivatedRoute) {
     this.managers = [
       { "id": 1, "value": "manager1" }
     ];
+
+    // this.route.data.subscribe((data) => {
+    //   this.projectModel = data.projectList;
+    //   console.log('list', this.projectModel);
+    // });
   }
 
   ngOnInit() {
+
     this.addProjectForm = this.formBuilder.group({
       project: ["", Validators.required],
       startDate: ["", Validators.required],
@@ -50,7 +58,7 @@ export class AddProjectComponent implements OnInit {
     }
   }
 
-  resetProject(){
+  resetProject() {
     this.addProjectForm.reset();
   }
 

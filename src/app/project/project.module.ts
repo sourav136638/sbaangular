@@ -14,10 +14,12 @@ import { ProjectGridComponent } from './components/add-project/child-components/
 import { UpdateProjectComponent } from './components/update-project/update-project.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { ParentTaskComponent } from './components/add-task/child-components/parent-task/parent-task.component';
+import { AddParentTaskComponent } from './add-task/child-components/add-parent-task/add-parent-task.component';
+import { AddNormalTaskComponent } from './components/add-task/child-components/add-normal-task/add-normal-task.component';
 
 
 @NgModule({
-  declarations: [AddProjectComponent, AddTaskComponent, AddUserComponent, ViewTaskComponent, UserGridComponent, ProjectGridComponent, UpdateProjectComponent, UpdateUserComponent, ParentTaskComponent],
+  declarations: [AddProjectComponent, AddTaskComponent, AddUserComponent, ViewTaskComponent, UserGridComponent, ProjectGridComponent, UpdateProjectComponent, UpdateUserComponent, ParentTaskComponent, AddParentTaskComponent, AddNormalTaskComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,

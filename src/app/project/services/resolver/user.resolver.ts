@@ -11,8 +11,8 @@ import { UserService } from '../user.service';
     constructor(private userService: UserService) { }
   
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      let id:string = route.paramMap.get('userId');
-      //return this.userService.getUserByUserId(id);
+      //let id:string = route.paramMap.get('userId');
+      return this.userService.getUserListPage;
     }
   
   }
