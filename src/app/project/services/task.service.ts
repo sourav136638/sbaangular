@@ -43,6 +43,18 @@ export class TaskService {
     }));
   }
 
+  updateUser(taskModel: TaskModel) {
+    this.loading.next(true);
+    this.restApi.updateTask(taskModel).subscribe((response) => {
+      this.loading.next(false);
+      //this.openUserDialog(DIALOG_MODE.SUCCESS, MESSAGE.USER_UPDATE_SUCCESS);
+    }, (error => {
+      this.loading.next(false);
+      console.error(error);
+      //this.openUserDialog(DIALOG_MODE.ERROR, MESSAGE.USER_UPDATE_ERROR);
+    }));
+  }
+
   
   openUserDialog(mode: string, message: string): void {
     this.dialogService.openModal(DIALOG_MODE.SUCCESS, mode, message, () => {

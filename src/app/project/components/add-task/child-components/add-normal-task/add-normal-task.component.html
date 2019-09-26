@@ -21,7 +21,7 @@
             </div>
             <div class="col-9 ">
                 <mat-slider id="priority" formControlName="priority" [ngClass]="{'is-invalid': isFieldValid(priority)}"
-                    thumbLabel [displayWith]="formatLabel" tickInterval="3" min="1" max="30" value="">
+                    thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="30" value="">
                 </mat-slider>
                 <app-field-error-display [displayError]="isErrorExists(priority, 'required')"
                     errorMsg="Priority is required">

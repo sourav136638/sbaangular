@@ -19,7 +19,21 @@ export class AddNormalTaskComponent implements OnInit {
   isFieldValid = FormUtils.isFieldValid;
   isErrorExists = FormUtils.isErrorExists;
 
-  constructor(private formBuilder: FormBuilder, private taskService: TaskService) { }
+  projectNames: any[];
+  parentTasks: any[];
+  users: any[];
+
+    constructor(private formBuilder: FormBuilder, private taskService: TaskService) { 
+      this.users = [
+        { "id": 1, "value": "Ram" }
+      ];
+      this.projectNames = [
+        { "id": 2, "value": "project1" }
+      ];
+      this.parentTasks = [
+        { "id": 1, "value": "Task1" }
+      ]
+    }
 
   ngOnInit() {
     this.addTaskForm = this.formBuilder.group({
@@ -33,6 +47,15 @@ export class AddNormalTaskComponent implements OnInit {
       parent: ["false"]
     });
   }
+
+  
+  
+  get startDate() { return this.addTaskForm.get('startDate'); }
+  get endDate() { return this.addTaskForm.get('endDate'); }
+  get priority() { return this.addTaskForm.get('priority'); }
+  get projectId() { return this.addTaskForm.get('projectId'); }
+  get parentTask() { return this.addTaskForm.get('parentTask'); }
+  get userId() { return this.addTaskForm.get('userId'); }
 
   submit() {
     if (this.addTaskForm.valid) {

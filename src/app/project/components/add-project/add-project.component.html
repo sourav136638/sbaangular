@@ -14,26 +14,26 @@
         </div>
         <div class="row mt-2">
             <div class="col-6 text-right">
-                <input type="radio">
-                <label>Set Start and End Date</label>
+                <input type="checkbox"  id="parent"  class="custom-control-input" data-md-icheck (change)="changeTask($event)">
+                <label class="custom-control-label" for="parent">Set Start and End Date</label>
             </div>
-            <div class="col-2">
-                <label for="startDate" class="required col-12">Start Date:</label>
+            <div class="col-2" *ngIf="marked">
+                <label for="startdate" class="required col-12">Start Date:</label>
             </div>
-            <div class="col-1 ">
-                <input class="form-control" id="startDate" formControlName="startDate"
-                    [ngClass]="{'is-invalid': isFieldValid(priority)}" />
-                <app-field-error-display [displayError]="isErrorExists(startDate, 'required')"
+            <div class="col-1 " *ngIf="marked">
+                <input class="form-control" id="startdate" formControlName="startdate"
+                    [ngClass]="{'is-invalid': isFieldValid(startdate)}" />
+                <app-field-error-display [displayError]="isErrorExists(startdate, 'required')"
                     errorMsg="Start Date is required">
                 </app-field-error-display>
             </div>
-            <div class="col-2">
-                <label for="endDate" class="required col-12">End Date:</label>
+            <div class="col-2" *ngIf="marked">
+                <label for="enddate" class="required col-12">End Date:</label>
             </div>
-            <div class="col-1 ">
-                <input class="form-control" id="endDate" formControlName="endDate"
-                    [ngClass]="{'is-invalid': isFieldValid(endDate)}" />
-                <app-field-error-display [displayError]="isErrorExists(endDate, 'required')"
+            <div class="col-1 " *ngIf="marked">
+                <input class="form-control" id="enddate" formControlName="enddate"
+                    [ngClass]="{'is-invalid': isFieldValid(enddate)}" />
+                <app-field-error-display [displayError]="isErrorExists(enddate, 'required')"
                     errorMsg="End Date is required">
                 </app-field-error-display>
             </div>

@@ -7,8 +7,8 @@ export class ProjectModelTransformer {
         let userManagementApiModel: ProjectApiModel = {
             projectId: projectModel.projectId,
             project: projectModel.project,
-            startDate: projectModel.startDate,
-            endDate: projectModel.endDate,
+            startdate: projectModel.startdate,
+            enddate: projectModel.enddate,
             priority: projectModel.priority,
             managerId: projectModel.managerId,
             completed: projectModel.completed,
@@ -22,8 +22,8 @@ export class ProjectModelTransformer {
         let projectApiModel: ProjectApiModel = {
             projectId: projectModel.projectId,
             project: projectModel.project,
-            startDate: projectModel.startDate,
-            endDate: projectModel.endDate,
+            startdate: projectModel.startdate,
+            enddate: projectModel.enddate,
             priority: projectModel.priority,
             managerId: projectModel.managerId,
             completed: projectModel.completed,

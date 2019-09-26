@@ -15,6 +15,9 @@ export class AddProjectComponent implements OnInit {
   projectModel: ProjectModel[];
   addProjectForm: FormGroup;
 
+
+  marked = false;
+  visibled = true;
   markAsTouched = FormUtils.markAsTouched;
   isFieldValid = FormUtils.isFieldValid;
   isErrorExists = FormUtils.isErrorExists;
@@ -31,20 +34,37 @@ export class AddProjectComponent implements OnInit {
     // });
   }
 
+  changeTask(e) {
+    this.marked = e.target.checked;
+    
+  }
+
   ngOnInit() {
 
-    this.addProjectForm = this.formBuilder.group({
-      project: ["", Validators.required],
-      startDate: ["", Validators.required],
-      endDate: ["", Validators.required],
-      priority: ["", Validators.required],
-      managerId: ["", Validators.required]
-    });
+    if(this.marked)
+    {
+      this.addProjectForm = this.formBuilder.group({
+        project: ["", Validators.required],
+        priority: ["", Validators.required],
+        managerId: ["", Validators.required]
+      });
+    } else {
+      this.addProjectForm = this.formBuilder.group({
+        project: ["", Validators.required],
+        priority: ["", Validators.required],
+        managerId: ["", Validators.required],
+        startdate: ["", Validators.required],
+        enddate: ["", Validators.required]
+        
+        
+      });
+    }
+    
   }
 
   get project() { return this.addProjectForm.get('project'); }
-  get startDate() { return this.addProjectForm.get('startDate'); }
-  get endDate() { return this.addProjectForm.get('endDate'); }
+  get startdate() { return this.addProjectForm.get('startdate'); }
+  get enddate() { return this.addProjectForm.get('enddate'); }
   get priority() { return this.addProjectForm.get('priority'); }
   get managerId() { return this.addProjectForm.get('managerId'); }
 

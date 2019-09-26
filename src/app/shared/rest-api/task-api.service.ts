@@ -25,10 +25,10 @@ export class TaskApiService extends RestService {
     return this.getApiPath(urlKey,...urlParam);
   }
 
-  getTaskList(): Observable<IResponse<TaskModel[]>> {
+  getTaskList(): Observable<any[]> {
     return this.get(this.getApiUrl(URLS.PROJECT_LIST), {}).pipe(
       map(responseJson => {
-        let response: IApiResponse<TaskApiModel[]> = responseJson;
+        let response: TaskApiModel[] = responseJson;
         return response;
       })
     );

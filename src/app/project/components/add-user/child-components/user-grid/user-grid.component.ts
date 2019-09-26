@@ -5,8 +5,6 @@ import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/project/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DialogUtilService } from 'src/app/shared/components/dialogs/dialog-util.service';
-import { DIALOG_MODE } from 'src/app/shared/constants/app-constant';
-import { MESSAGE } from 'src/app/shared/constants/message-constants';
 
 @Component({
   selector: 'app-user-grid',
@@ -21,8 +19,7 @@ export class UserGridComponent implements OnInit {
   dataSource: MatTableDataSource<UserModel>;
   //displayedColumns: string[] = ['firstName', 'lastName', 'empId'];
   pageLength: number;
-
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, { static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private userService:UserService,private router: Router,
@@ -30,7 +27,7 @@ export class UserGridComponent implements OnInit {
     this.displayedColumns = [
       'firstName',
       'lastName',
-      'empId',
+      'employeeId',
       'action'
     ];
 
