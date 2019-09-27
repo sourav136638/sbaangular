@@ -37,7 +37,7 @@ export class AddUserComponent implements OnInit {
     if (this.addUserForm.valid) {
       let userModel: UserModel = this.addUserForm.value;
       this.userService.createUser(userModel);
-      console.log('User', this.addUserForm.value)
+      
     } else {
       this.markAsTouched(this.addUserForm);
     }

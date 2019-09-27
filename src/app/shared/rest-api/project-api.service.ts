@@ -29,7 +29,7 @@ export class ProjectApiService extends RestService {
     return this.get(this.getApiUrl(URLS.PROJECT_LIST), {}).pipe(
       map(responseJson => {
         let response: IApiResponse<ProjectApiModel[]> = responseJson;
-        console.log("ProjectList",response)
+        
         return response;
       })
     );

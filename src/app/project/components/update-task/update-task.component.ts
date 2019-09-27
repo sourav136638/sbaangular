@@ -85,17 +85,17 @@ export class UpdateTaskComponent implements OnInit {
 
 
     this.subscriptions.push(this.taskService.parentTaskListDataSubject.asObservable().subscribe((data) => {
-      console.log("From Grid parent", data);
+     
       this.parentTasks = data;
     }));
 
     this.subscriptions.push(this.userService.userListDataSubject.asObservable().subscribe((data) => {
-      console.log("From Grid user", data);
+     
       this.userModel.data = data;
     }));
 
     this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
-      console.log("From Grid project", data);
+     
       this.projectModel.data = data;
     }));
 
@@ -104,7 +104,7 @@ export class UpdateTaskComponent implements OnInit {
 
     const routeParams = this.router.snapshot.params;
     this.paramsData = routeParams;
-    console.log("route",this.paramsData);
+    
     if(!this.selectUserId){
       this.selectUserId = this.paramsData.userId;
     }
@@ -128,13 +128,13 @@ export class UpdateTaskComponent implements OnInit {
 
   selectUser(row) {
     this.selectUserId = row.userId;
-    console.log("userId", row.userId)
+    
     this.close = false;
   }
 
   selectProject(row) {
     this.selectProjectId = row.projectId;
-    console.log("projectId", this.selectProjectId);
+    
   }
 
 
@@ -142,7 +142,7 @@ export class UpdateTaskComponent implements OnInit {
     if (this.addTaskForm.valid) {
       let taskModel: TaskModel = this.addTaskForm.value;
       this.taskService.createTask(taskModel);
-      console.log('User', this.addTaskForm.value)
+    
     } else {
       this.markAsTouched(this.addTaskForm);
     }

@@ -42,10 +42,6 @@ export class AddProjectComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource();
 
-    // this.route.data.subscribe((data) => {
-    //   this.projectModel = data.projectList;
-    //   console.log('list', this.projectModel);
-    // });
   }
 
   changeTask(e) {
@@ -74,9 +70,7 @@ export class AddProjectComponent implements OnInit {
     }
 
     this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
-      // console.log("From Grid Component", data);
-      this.dataSource.data = data;
-      console.log("project",this.dataSource)
+      this.dataSource.data = data;      
     }));
     this.dataSource.sort = this.sort;
 
@@ -91,8 +85,7 @@ export class AddProjectComponent implements OnInit {
   submit() {
     if (this.addProjectForm.valid) {
       let projectModel: ProjectModel = this.addProjectForm.value;
-      this.projectService.createProject(projectModel);
-      console.log('User', this.addProjectForm.value)
+      this.projectService.createProject(projectModel);     
     } else {
       this.markAsTouched(this.addProjectForm);
     }
@@ -104,8 +97,7 @@ export class AddProjectComponent implements OnInit {
 
   selectManager(row){
     this.selectManagerId=row.managerId;
-    
-    console.log("project",this.selectManagerId);
+   
   }
 
 }

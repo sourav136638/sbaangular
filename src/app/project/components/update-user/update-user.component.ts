@@ -31,7 +31,7 @@ export class UpdateUserComponent implements OnInit {
 
     const routeParams = this.router.snapshot.params;
     this.paramsData = routeParams;
-    console.log("route", this.paramsData);
+   
   }
 
   get firstName() { return this.addUserForm.get('firstName'); }
@@ -42,7 +42,7 @@ export class UpdateUserComponent implements OnInit {
     if (this.addUserForm.valid) {
       let userModel: UserModel = this.addUserForm.value;
       this.userService.updateUser(userModel);
-      console.log('User', this.addUserForm.value)
+   
     } else {
       this.markAsTouched(this.addUserForm);
     }

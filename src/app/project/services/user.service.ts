@@ -59,11 +59,11 @@ export class UserService {
   }
 
   deleteUser(userId: string) {
-    //console.log('delete', userId);
+    
     this.loading.next(true);
     this.restApi.deleteUserByUserId(userId).subscribe((response) => {
       this.loading.next(false);
-      //this.openUserDialog();
+     
       this.openUserDialog(DIALOG_MODE.SUCCESS, MESSAGE.USER_DELETE_SUCCESS);
       this.route.navigate(['project/addUser']);
       this.getUserListPage();
@@ -76,13 +76,9 @@ export class UserService {
 
   openUserDialog(mode: string, message: string): void {
     this.dialogService.openModal(DIALOG_MODE.SUCCESS, mode, message, () => {
-      //confirmed
-      console.log('Yes');
-      //this.route.navigate(['/project/addUser']);
+      
     }, () => {
-      //not confirmed
-      console.log('No');
-      //this.route.navigate(['/project/addUser']);
+     
     });
   }
 }

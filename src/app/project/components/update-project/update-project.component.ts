@@ -46,10 +46,6 @@ export class UpdateProjectComponent implements OnInit {
   
       this.dataSource = new MatTableDataSource();
 
-    // this.route.paramMap.subscribe(data =>
-    //   console.log(data)
-    // );
-
     
   }
 
@@ -63,15 +59,15 @@ export class UpdateProjectComponent implements OnInit {
     });
 
     this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
-      // console.log("From Grid Component", data);
+     
       this.dataSource.data = data;
-      console.log("project", this.dataSource)
+      
     }));
 
     this.dataSource.sort = this.sort;
     const routeParams = this.route.snapshot.params;
     this.paramsData = routeParams;
-    console.log("route",this.paramsData);
+    
     if(!this.selectManagerId){
       this.selectManagerId = this.paramsData.managerId;
     }
@@ -89,7 +85,7 @@ export class UpdateProjectComponent implements OnInit {
     if (this.addProjectForm.valid) {
       let projectModel: ProjectModel = this.addProjectForm.value;
       this.projectService.updateProject(projectModel);
-      console.log('User', this.addProjectForm.value)
+     
     } else {
       this.markAsTouched(this.addProjectForm);
     }

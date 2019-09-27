@@ -31,7 +31,7 @@ export class TaskApiService extends RestService {
     return this.get(this.getApiUrl(URLS.TASK_LIST), {}).pipe(
       map(responseJson => {
         let response: IApiResponse<TaskApiModel[]> = responseJson;
-        console.log("TaskList",response)
+        
         return response;
       })
     );
@@ -41,14 +41,14 @@ export class TaskApiService extends RestService {
     return this.get(this.getApiUrl(URLS.GET_PARENT_TASK), {}).pipe(
       map(responseJson => {
         let response: IApiResponse<ParentTaskApiModel[]> = responseJson;
-        console.log("Parent TaskList",response)
+       
         return response;
       })
     );
   }
 
   createTask(TaskModel: TaskModel): Observable<TaskModel> {
-    console.log("inside rest", TaskModelTransformer.createTaskModelTransformer(TaskModel))
+   
     return this.post(this.getApiUrl(URLS.TASK_CREATE), TaskModelTransformer.createTaskModelTransformer(TaskModel), {});
 
   }
@@ -63,18 +63,7 @@ deleteTaskById(taskId: string): Observable<any> {
 }
 
 
-  // getProjectById(id: string): Observable<TaskModel> {
-  //   let TaskModel: TaskModel;
-  //   return this.get(this.getApiUrl(URLS., id), {})
-  //     .pipe(
-  //       map(response => {
-  //         //console.log("inside rest: response", response);
-  //         TaskModel = TaskModelTransformer.userTransformer(response);
-  //         //console.log("inside rest: userManagementAppModel", TaskModel);
-  //         return TaskModel;
-  //       })
-  //     );
-  // }
+ 
 
 }
 

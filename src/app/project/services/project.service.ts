@@ -58,13 +58,9 @@ export class ProjectService {
 
   openUserDialog(mode: string, message: string): void {
     this.dialogService.openModal(DIALOG_MODE.SUCCESS, mode, message, () => {
-      //confirmed
-      console.log('Yes');
-      //this.route.navigate(['/project/addUser']);
+     
     }, () => {
-      //not confirmed
-      console.log('No');
-      //this.route.navigate(['/project/addUser']);
+     
     });
   }
 }

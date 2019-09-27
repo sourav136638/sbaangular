@@ -37,7 +37,7 @@ export class ProjectGridComponent implements OnInit {
     
 
     this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
-      // console.log("From Grid Component", data);
+
       if (data) {
         this.dataSource.data = data;
         this.pageLength = data.length;

@@ -29,31 +29,20 @@ export class UserApiService extends RestService {
     return this.get(this.getApiUrl(URLS.GET_USER_LIST), {}).pipe(
       map(responseJson => {
         let response: IApiResponse<UserApiModel[]> = responseJson;
-        console.log("userList",response);
+        
         return response;
       })
     );
   }
 
   createUser(userModel: UserModel): Observable<UserModel> {
-    console.log("api service", UserModelTransformer.createUserModelTransformer(userModel));
+    
     return this.post(this.getApiUrl(URLS.ADD_USER),
       UserModelTransformer.createUserModelTransformer(userModel), {});
 
   }
 
-  // getUserById(id: string): Observable<UserModel> {
-  //   let userModel: UserModel;
-  //   return this.get(this.getApiUrl(URLS.GET_USER_MANAGEMENT, id), {})
-  //     .pipe(
-  //       map(response => {
-  //         //console.log("inside rest: response", response);
-  //         userModel = UserModelTransformer.userTransformer(response);
-  //         //console.log("inside rest: userManagementAppModel", userModel);
-  //         return userModel;
-  //       })
-  //     );
-  // }
+ 
 
   updateUser(userModel: UserModel): Observable<UserModel> {
     let userApiModel: UserApiModel = UserModelTransformer.updateUserModelTransformer(userModel);

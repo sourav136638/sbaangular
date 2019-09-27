@@ -74,7 +74,7 @@ export class TaskService {
   }
 
   deleteTask(taskId: string) {
-    //console.log('delete', userId);
+    
     this.loading.next(true);
     this.restApi.deleteTaskById(taskId).subscribe((response) => {
       this.loading.next(false);
@@ -93,11 +93,11 @@ export class TaskService {
   openUserDialog(mode: string, message: string): void {
     this.dialogService.openModal(DIALOG_MODE.SUCCESS, mode, message, () => {
       //confirmed
-      console.log('Yes');
+     
       //this.route.navigate(['/project/addUser']);
     }, () => {
       //not confirmed
-      console.log('No');
+     
       //this.route.navigate(['/project/addUser']);
     });
   }

@@ -38,9 +38,9 @@ export class ViewTaskComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptions.push(this.taskService.taskListDataSubject.asObservable().subscribe((data) => {
-      // console.log("From Grid Component", data);
+      
       if (data) {
-        console.log(this.dataSource)
+       
         this.dataSource.data = data;
         this.pageLength = data.length;
         this.goToFirstPage();
@@ -49,12 +49,7 @@ export class ViewTaskComponent implements OnInit {
 
     }));
 
-    // this.route.data.subscribe((data) => {
-    //   if (data.taskList) {
-    //     this.dataSource = data.taskList;
-    //     console.log('list', this.dataSource);
-    //   }
-    // });
+   
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

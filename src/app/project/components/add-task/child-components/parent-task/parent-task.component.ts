@@ -34,7 +34,7 @@ export class ParentTaskComponent implements OnInit {
     if (this.addTaskForm.valid) {
       let taskModel: TaskModel = this.addTaskForm.value;
       this.taskService.createTask(taskModel);
-      console.log('User', this.addTaskForm.value)
+    
     } else {
       this.markAsTouched(this.addTaskForm);
     }

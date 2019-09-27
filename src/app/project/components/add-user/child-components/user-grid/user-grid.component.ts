@@ -36,16 +36,12 @@ export class UserGridComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptions.push(this.userService.userListDataSubject.asObservable().subscribe((data) => {
-      console.log("From Grid Component", data);
+     
       this.dataSource.data = data;
       this.pageLength = data.length;
       this.goToFirstPage();
     }));
-    // this.route.data.subscribe((data) => {
-    //   this.userModel = data.userList;
-    //   this.dataSource.data = data.userList;
-    //   console.log('list', this.userModel);
-    // });
+   
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -73,11 +69,7 @@ export class UserGridComponent implements OnInit {
   }
 
   deleteUser(element: UserModel) {
-    // this.dialogUtilService.openModal(DIALOG_MODE.WARNING, MESSAGE.USER_DELETE_CONFRIM, () => {
-    //   //confirmed
-    //   //console.log('Yes');
-    //   this.userService.deleteUser(element.userId);
-    // });
+   
     this.userService.deleteUser(element.userId);
 
   }
