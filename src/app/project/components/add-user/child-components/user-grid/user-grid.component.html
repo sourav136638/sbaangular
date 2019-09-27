@@ -1,7 +1,3 @@
-<!-- <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-</mat-form-field> -->
-
 <div class="row">
     <div class="col-3 mt-5 mb-3 float-right">
         <div class="input-group">
@@ -27,7 +23,7 @@
     </ng-container>
     <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef class="p-3 action-col"></mat-header-cell>
-        <mat-cell *matCellDef="let element" class="p-3 text-truncate d-inline action-col">
+        <mat-cell *matCellDef="let element">
             <button class="btn btn-outline-primary font-weight-bold" (click)="editUser(element)">
                 <i class="fa fa-eye mr-2"></i>Edit
             </button>

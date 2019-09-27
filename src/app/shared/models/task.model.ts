@@ -9,5 +9,6 @@ export interface TaskModel {
     parentId: string,
     userId: string,
     parentTask: string,
-    parent: boolean
+    parent: boolean,
+    noOfTask:string;
 }

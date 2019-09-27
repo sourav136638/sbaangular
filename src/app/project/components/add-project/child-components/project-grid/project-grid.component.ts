@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectModel } from 'src/app/shared/models/project.model';
 import { ProjectService } from 'src/app/project/services/project.service';
 
@@ -16,16 +16,16 @@ export class ProjectGridComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<ProjectModel>;
   pageLength: number;
-
+  projectModel: ProjectModel[];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private projectService:ProjectService,private router: Router) {
+  constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) {
     this.displayedColumns = [
       'project',
-      //'noOfTask',
-      'startDate',
-      'endDate',
+      'noOfTask',
+      'startdate',
+      'enddate',
       'completed',
       'action'
     ];
@@ -34,12 +34,18 @@ export class ProjectGridComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+
     this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
       // console.log("From Grid Component", data);
-     // this.dataSource.data = data;
-      this.pageLength = data.length;
-      this.goToFirstPage();
+      if (data) {
+        this.dataSource.data = data;
+        this.pageLength = data.length;
+        this.goToFirstPage();
+      }
+
     }));
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -55,7 +61,7 @@ export class ProjectGridComponent implements OnInit {
     this.goToFirstPage();
   }
 
-  goToFirstPage(){
+  goToFirstPage() {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -66,16 +72,7 @@ export class ProjectGridComponent implements OnInit {
   }
 
   deleteProject(element: ProjectModel) {
-    // this.dialogUtilService.openModal(DIALOG_MODE.WARNING, MESSAGE.USER_DELETE_CONFRIM, () => {
-    //   //confirmed
-    //   //console.log('Yes');
-    //   this.userService.deleteUser(element.userId);
-    // });
-    this.projectService.deleteProject(element.projectId);
+    
   }
-
-suspendProject(element: ProjectModel){
-  this.projectService.deleteProject(element.projectId);
-}
 
 }

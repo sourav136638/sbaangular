@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import FormUtils from 'src/app/shared/util/form-utils';
 import { UserService } from '../../services/user.service';
 import { UserModel } from 'src/app/shared/models/user.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-user',
@@ -15,7 +16,11 @@ export class UpdateUserComponent implements OnInit {
   markAsTouched = FormUtils.markAsTouched;
   isFieldValid = FormUtils.isFieldValid;
   isErrorExists = FormUtils.isErrorExists;
-  constructor(private formBuilder: FormBuilder, private userService:UserService) { }
+  paramsData: any;
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: ActivatedRoute,
+    private route: Router) { }
 
   ngOnInit() {
     this.addUserForm = this.formBuilder.group({
@@ -23,6 +28,10 @@ export class UpdateUserComponent implements OnInit {
       lastName: ['', Validators.required],
       empId: ['', Validators.required]
     });
+
+    const routeParams = this.router.snapshot.params;
+    this.paramsData = routeParams;
+    console.log("route", this.paramsData);
   }
 
   get firstName() { return this.addUserForm.get('firstName'); }
@@ -37,6 +46,10 @@ export class UpdateUserComponent implements OnInit {
     } else {
       this.markAsTouched(this.addUserForm);
     }
+  }
+
+  cancel() {
+    this.route.navigate(['project/addUser']);
   }
 
 }

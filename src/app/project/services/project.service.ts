@@ -26,7 +26,7 @@ export class ProjectService {
     }, (error => {
       this.loading.next(false);
       console.error(error);
-     // this.openUserDialog(MODE.ERROR, MESSAGE.USER_CREATE_ERROR);
+      // this.openUserDialog(MODE.ERROR, MESSAGE.USER_CREATE_ERROR);
     }));
   }
 
@@ -48,22 +48,7 @@ export class ProjectService {
     this.loading.next(true);
     this.restApi.updateProject(projectModel).subscribe((response) => {
       this.loading.next(false);
-     // this.openUserDialog(DIALOG_MODE.SUCCESS, MESSAGE.);
-    }, (error => {
-      this.loading.next(false);
-      console.error(error);
-      //this.openUserDialog(DIALOG_MODE.ERROR, MESSAGE.);
-    }));
-  }
-
-  deleteProject(userId: string) {
-    //console.log('delete', userId);
-    this.loading.next(true);
-    this.restApi.deleteProjectByUserId(userId).subscribe((response) => {
-      this.loading.next(false);
-      //this.openUserDialog();
-      //this.openUserDialog(DIALOG_MODE.SUCCESS, MESSAGE.);
-      this.route.navigate(['addProject']);
+      // this.openUserDialog(DIALOG_MODE.SUCCESS, MESSAGE.);
     }, (error => {
       this.loading.next(false);
       console.error(error);

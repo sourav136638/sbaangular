@@ -25,10 +25,11 @@ export class ProjectApiService extends RestService {
     return this.getApiPath(urlKey,...urlParam);
   }
 
-  getProjectList(): Observable<any[]> {
+  getProjectList(): Observable<IResponse<ProjectModel[]>> {
     return this.get(this.getApiUrl(URLS.PROJECT_LIST), {}).pipe(
       map(responseJson => {
-        let response: ProjectModel[] = responseJson;
+        let response: IApiResponse<ProjectApiModel[]> = responseJson;
+        console.log("ProjectList",response)
         return response;
       })
     );
@@ -39,26 +40,10 @@ export class ProjectApiService extends RestService {
 
   }
 
-  // getProjectById(id: string): Observable<ProjectModel> {
-  //   let projectModel: ProjectModel;
-  //   return this.get(this.getApiUrl(URLS., id), {})
-  //     .pipe(
-  //       map(response => {
-  //         //console.log("inside rest: response", response);
-  //         ProjectModel = ProjectModelTransformer.userTransformer(response);
-  //         //console.log("inside rest: userManagementAppModel", ProjectModel);
-  //         return ProjectModel;
-  //       })
-  //     );
-  // }
-
   updateProject(ProjectModel: ProjectModel): Observable<ProjectModel> {
     let projectApiModel: ProjectApiModel = ProjectModelTransformer.updateProjectModelTransformer(ProjectModel);
     return this.post(this.getApiUrl(URLS.UPDATE_PROJECT, ProjectModel.projectId), projectApiModel, {});
   }
 
-  deleteProjectByUserId(projectId: string): Observable<any> {
-    return this.delete(this.getApiUrl(URLS.DELETE_PROJECT, projectId), {});
-  }
-
+ 
 }

@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
   
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
       //let id:string = route.paramMap.get('userId');
-      return this.userService.getUserListPage;
+      return this.userService.getUserListPage();
     }
   
   }

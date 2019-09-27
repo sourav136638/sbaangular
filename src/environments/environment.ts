@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  user_uri:'http://localhost:8080',
+  user_uri:'http://localhost:8081',
 };
 
 /*

@@ -24,12 +24,6 @@ export class ParentTaskComponent implements OnInit {
   ngOnInit() {
     this.addTaskForm = this.formBuilder.group({
       task: ["", Validators.required],
-      startDate: ["00000000"],
-      endDate: ["00000000"],
-      priority: ["null"],
-      projectId: ["null"],
-      userId: ["null"],
-      parentTask: ["null"],
       parent: ["true"]
     });
   }

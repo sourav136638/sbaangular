@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ProjectService } from '../project.service';
+import { ProjectModel } from 'src/app/shared/models/project.model';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,8 @@ import { ProjectService } from '../project.service';
     constructor(private projectService: ProjectService) { }
   
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      //let id:string = route.paramMap.get('userId');
-      return this.projectService.getProjectListPage;
+      //let element:ProjectModel[] = route.paramMap.get('element');
+      return this.projectService.getProjectListPage();
     }
   
   }

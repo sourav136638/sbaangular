@@ -14,12 +14,13 @@ import { ProjectGridComponent } from './components/add-project/child-components/
 import { UpdateProjectComponent } from './components/update-project/update-project.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { ParentTaskComponent } from './components/add-task/child-components/parent-task/parent-task.component';
-import { AddParentTaskComponent } from './add-task/child-components/add-parent-task/add-parent-task.component';
 import { AddNormalTaskComponent } from './components/add-task/child-components/add-normal-task/add-normal-task.component';
+import { UpdateTaskComponent } from './components/update-task/update-task.component';
 
+//import { NgbModule, NgbDateAdapter, NgbNativeDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AddProjectComponent, AddTaskComponent, AddUserComponent, ViewTaskComponent, UserGridComponent, ProjectGridComponent, UpdateProjectComponent, UpdateUserComponent, ParentTaskComponent, AddParentTaskComponent, AddNormalTaskComponent],
+  declarations: [AddProjectComponent, AddTaskComponent, AddUserComponent, ViewTaskComponent, UserGridComponent, ProjectGridComponent, UpdateProjectComponent, UpdateUserComponent, ParentTaskComponent, AddNormalTaskComponent, UpdateTaskComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,
@@ -27,6 +28,9 @@ import { AddNormalTaskComponent } from './components/add-task/child-components/a
     FormsModule,
     ReactiveFormsModule,
     MaterialModule
-  ]
+  ],
+  // providers: [
+  //   provide: [{NgbDateAdapter, useclass:NgbNativeDateAdapter}]
+  // ]
 })
 export class ProjectModule { }

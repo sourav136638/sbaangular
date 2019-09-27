@@ -4,14 +4,13 @@ import { TaskService } from '../task.service';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 
-  export class TaskResolver implements Resolve<any> {
+export class ParentTaskResolver implements Resolve<any> {
     constructor(private taskService: TaskService) { }
-  
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      //let id:string = route.paramMap.get('userId');
-      return this.taskService.getTaskListPage();
+        return this.taskService.getParentTaskListPage();
     }
-  
-  }
+
+}

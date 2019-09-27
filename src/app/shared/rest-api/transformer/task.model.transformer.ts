@@ -16,10 +16,30 @@ export class TaskModelTransformer {
             parentId: "",
             userId: taskModel.userId,
             parentTask: taskModel.parentTask,
-            parent: taskModel.parent
+            parent: taskModel.parent,
+            noOfTask:""
         }
 
         return createTaskModel;
+    }
+
+    public static updateTaskModelTransformer(taskModel: TaskModel): TaskApiModel {
+        let updateTaskModel: TaskApiModel = {
+            taskId: "",
+            task: taskModel.task,
+            startDate: taskModel.startDate,
+            endDate: taskModel.endDate,
+            priority: taskModel.priority,
+            status: "",
+            projectId: taskModel.projectId,
+            parentId: "",
+            userId: taskModel.userId,
+            parentTask: taskModel.parentTask,
+            parent: taskModel.parent,
+            noOfTask:""
+        }
+
+        return updateTaskModel;
     }
 
     // public userListTransform(response: ProjectApiModel): ProjectModel {

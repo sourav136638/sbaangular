@@ -10,6 +10,8 @@ import { ParentTaskComponent } from './components/add-task/child-components/pare
 import { UserResolver } from './services/resolver/user.resolver';
 import { ProjectResolver } from './services/resolver/project.resolver';
 import { TaskResolver } from './services/resolver/task.resolver';
+import { ParentTaskResolver } from 'src/app/project/services/resolver/parent.resolver';
+import { UpdateTaskComponent } from 'src/app/project/components/update-task/update-task.component';
 
 
 const routes: Routes = [
@@ -29,7 +31,10 @@ const routes: Routes = [
   {
     path: 'addTask', component: AddTaskComponent,
     resolve: {
-      taskList: TaskResolver
+      taskList: TaskResolver,
+      parentTaskList: ParentTaskResolver,
+      projectList: ProjectResolver,
+      userList: UserResolver
     }
   },
   {
@@ -38,9 +43,24 @@ const routes: Routes = [
       taskList: TaskResolver
     }
   },
-  { path: 'editProject', component: UpdateProjectComponent },
+  {
+    path: 'editProject', component: UpdateProjectComponent,
+    resolve: {
+      taskList: TaskResolver,
+      projectList: ProjectResolver
+    }
+  },
   { path: 'editUser', component: UpdateUserComponent },
-  { path: 'parentTask', component: ParentTaskComponent }
+  { path: 'parentTask', component: ParentTaskComponent },
+  {
+    path: 'editTask', component: UpdateTaskComponent,
+    resolve: {
+      taskList: TaskResolver,
+      projectList: ProjectResolver,
+      userList: UserResolver,
+      parentTaskList: ParentTaskResolver
+    }
+  }
 ];
 
 @NgModule({

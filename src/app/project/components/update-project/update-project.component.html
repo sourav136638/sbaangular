@@ -5,36 +5,33 @@
                 <label for="project" class="required col-12">Project:</label>
             </div>
             <div class="col-9 ">
-                <input class="form-control" id="project" formControlName="project"
-                    [ngClass]="{'is-invalid': isFieldValid(project)}" />
-                <app-field-error-display [displayError]="isErrorExists(project, 'required')"
-                    errorMsg="Project is required">
+                <input class="form-control" id="project" formControlName="project" [(ngModel)]="paramsData.project" [ngClass]="{'is-invalid': isFieldValid(project)}" />
+                <app-field-error-display [displayError]="isErrorExists(project, 'required')" errorMsg="Project is required">
                 </app-field-error-display>
             </div>
         </div>
         <div class="row mt-2">
             <div class="col-6 text-right">
-                <input type="radio">
-                <label>Set Start and End Date</label>
+                <input type="checkbox" id="parent" class="custom-control-input" data-md-icheck (change)="changeTask($event)">
+                <label class="custom-control-label" for="parent">Set Start and End Date</label>
             </div>
-            <div class="col-2">
-                <label for="startDate" class="required col-12">Start Date:</label>
+        </div>
+        <div class="row mt-2" >
+            <div class="col-3">
+                <label for="startdate" class="required col-12">Start Date:</label>
             </div>
-            <div class="col-1 ">
-                <input class="form-control" id="startDate" formControlName="startDate"
-                    [ngClass]="{'is-invalid': isFieldValid(priority)}" />
-                <app-field-error-display [displayError]="isErrorExists(startDate, 'required')"
-                    errorMsg="Start Date is required">
+            <div class="col-3 ">
+                <input class="form-control" id="startdate" formControlName="startdate" [(ngModel)]="paramsData.startdate" [ngClass]="{'is-invalid': isFieldValid(startdate)}"
+                />
+                <app-field-error-display [displayError]="isErrorExists(startdate, 'required')" errorMsg="Start Date is required">
                 </app-field-error-display>
             </div>
-            <div class="col-2">
-                <label for="endDate" class="required col-12">End Date:</label>
+            <div class="col-3">
+                <label for="enddate" class="required col-12">End Date:</label>
             </div>
-            <div class="col-1 ">
-                <input class="form-control" id="endDate" formControlName="endDate"
-                    [ngClass]="{'is-invalid': isFieldValid(endDate)}" />
-                <app-field-error-display [displayError]="isErrorExists(endDate, 'required')"
-                    errorMsg="End Date is required">
+            <div class="col-3 ">
+                <input class="form-control" id="enddate" formControlName="enddate" [(ngModel)]="paramsData.enddate" [ngClass]="{'is-invalid': isFieldValid(enddate)}" />
+                <app-field-error-display [displayError]="isErrorExists(enddate, 'required')" errorMsg="End Date is required">
                 </app-field-error-display>
             </div>
         </div>
@@ -43,11 +40,10 @@
                 <label for="priority" class="required col-12">Priority:</label>
             </div>
             <div class="col-9 ">
-                <mat-slider id="priority" formControlName="priority" [ngClass]="{'is-invalid': isFieldValid(priority)}"
-                    thumbLabel [displayWith]="formatLabel" tickInterval="3" min="1" max="30" value="">
+                <mat-slider id="priority" formControlName="priority" [(ngModel)]="paramsData.priority" [ngClass]="{'is-invalid': isFieldValid(priority)}" thumbLabel [displayWith]="formatLabel"
+                    tickInterval="3" min="1" max="30" value="paramsData.priority">
                 </mat-slider>
-                <app-field-error-display [displayError]="isErrorExists(priority, 'required')"
-                    errorMsg="Priority is required">
+                <app-field-error-display [displayError]="isErrorExists(priority, 'required')" errorMsg="Priority is required">
                 </app-field-error-display>
             </div>
         </div>
@@ -56,19 +52,83 @@
                 <label for="managerId" class="required col-12">Manager:</label>
             </div>
             <div class="col-9 ">
-                <select class="custom-select" id="managerId" formControlName="managerId"
-                    [ngClass]="{'is-invalid': isFieldValid(managerId)}">
-                    <option *ngFor="let manager of managers" [value]="manager.id">
-                        {{manager.value}}</option>
-                </select>
-                <app-field-error-display [displayError]="isErrorExists(managerId, 'required')"
-                    errorMsg="Manager is required">
+                <!-- <select class="custom-select" id="managerId" formControlName="managerId" [ngClass]="{'is-invalid': isFieldValid(managerId)}">
+                    <option *ngFor="let project of projectModel" [value]="project.managerId">
+                        {{project.value}}</option>
+                </select> -->
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <input class="form-control" id="managerId" formControlName="managerId" [ngClass]="{'is-invalid': isFieldValid(managerId)}"
+                        placeholder="Select Manager" [(ngModel)]="selectManagerId" />
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Choose Manager</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                    <div class="col-3 mt-5 mb-3 float-right">
+                                        <div class="input-group">
+                                            <input autocomplete="off" (keyup)="applyFilter($event.target.value)" type="text" placeholder="Filter" class="form-control">
+                                            <span class="icon-inside">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <mat-table #table [dataSource]="dataSource" matSort>
+                                    <ng-container matColumnDef="project">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.project}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="startdate">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.startdate}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="enddate">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.enddate}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="noOfTask">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> No Of Task </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.noOfTask}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="completed">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Completed </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.completed}} </mat-cell>
+                                    </ng-container>
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectManager(row)" class="arrow-pointer"></mat-row>
+                                </mat-table>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <app-field-error-display [displayError]="isErrorExists(managerId, 'required')" errorMsg="Manager is required">
                 </app-field-error-display>
             </div>
         </div>
         <div class="row mt-2">
             <div class="col-5 text-right">
                 <button type="submit" class="btn btn-primary mt-2">Update</button>
+            </div>
+            <div class="col-5 text-right">
+                <button class="btn btn-primary mt-2" (click)="cancel()">Cancel</button>
             </div>
         </div>
     </form>

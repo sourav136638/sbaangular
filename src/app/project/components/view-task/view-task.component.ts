@@ -3,7 +3,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogUtilService } from 'src/app/shared/components/dialogs/dialog-util.service';
 import { TaskModel } from 'src/app/shared/models/task.model';
 import { TaskService } from '../../services/task.service';
@@ -18,18 +18,17 @@ export class ViewTaskComponent implements OnInit {
   subscriptions: Subscription[] = [];
   displayedColumns: string[];
   dataSource: MatTableDataSource<TaskModel>;
-  //displayedColumns: string[] = ['firstName', 'lastName', 'empId'];
   pageLength: number;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private taskService:TaskService,private router: Router) {
+  constructor(private taskService: TaskService, private router: Router, private route: ActivatedRoute) {
     this.displayedColumns = [
       'task',
-      'parent',
-      'startdate',
-      'enddate',
+      'parentTask',
+      'startDate',
+      'endDate',
       'priority',
       'action'
     ];
@@ -38,12 +37,24 @@ export class ViewTaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.taskService.getTaskListPage.asObservable().subscribe((data) => {
+    this.subscriptions.push(this.taskService.taskListDataSubject.asObservable().subscribe((data) => {
       // console.log("From Grid Component", data);
-      this.dataSource.data = data;
-      this.pageLength = data.length;
-      this.goToFirstPage();
+      if (data) {
+        console.log(this.dataSource)
+        this.dataSource.data = data;
+        this.pageLength = data.length;
+        this.goToFirstPage();
+      }
+
+
     }));
+
+    // this.route.data.subscribe((data) => {
+    //   if (data.taskList) {
+    //     this.dataSource = data.taskList;
+    //     console.log('list', this.dataSource);
+    //   }
+    // });
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -59,18 +70,18 @@ export class ViewTaskComponent implements OnInit {
     this.goToFirstPage();
   }
 
-  goToFirstPage(){
+  goToFirstPage() {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
-  editTask(element){
-
+  editTask(element) {
+    this.router.navigate(['project/editTask', element]);
   }
-  
-  deleteTask(element){
 
+  deleteTask(element) {
+    this.taskService.deleteTask(element.taskId);
   }
 
 }

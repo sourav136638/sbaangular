@@ -13,16 +13,16 @@ import { UserService } from 'src/app/project/services/user.service';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: 'app-add-normal-task',
-  templateUrl: './add-normal-task.component.html',
-  styleUrls: ['./add-normal-task.component.scss']
+  selector: 'app-update-task',
+  templateUrl: './update-task.component.html',
+  styleUrls: ['./update-task.component.scss']
 })
-export class AddNormalTaskComponent implements OnInit {
+export class UpdateTaskComponent implements OnInit {
 
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   displayedColumns: string[];
-  displayedColumnsForProject:string[];
+  displayedColumnsForProject: string[];
   userModel: MatTableDataSource<UserModel>;
   projectModel: MatTableDataSource<ProjectModel>;
 
@@ -34,19 +34,22 @@ export class AddNormalTaskComponent implements OnInit {
   subscriptions: Subscription[] = [];
   projectNames: any[];
   parentTasks: ParentTaskModel[];
+  paramsData: any;
 
   //for bindining data
-  selectUserId:string;
-  selectProjectId:string;
+  selectUserId: string;
+  selectProjectId: string;
   //closing popup
-  close:boolean = true;
+  close: boolean = true;
 
 
   constructor(private formBuilder: FormBuilder,
     private taskService: TaskService,
     private router: ActivatedRoute,
     private userService: UserService,
-    private projectService: ProjectService) {
+    private projectService: ProjectService,
+    private route: Router,
+  ) {
 
 
     this.displayedColumns = [
@@ -98,6 +101,17 @@ export class AddNormalTaskComponent implements OnInit {
 
     this.userModel.sort = this.sort;
     this.projectModel.sort = this.sort;
+
+    const routeParams = this.router.snapshot.params;
+    this.paramsData = routeParams;
+    console.log("route",this.paramsData);
+    if(!this.selectUserId){
+      this.selectUserId = this.paramsData.userId;
+    }
+    if(!this.selectProjectId) {
+      this.selectProjectId = this.paramsData.projectId;
+    }
+
   }
 
   get startDate() { return this.addTaskForm.get('startDate'); }
@@ -114,13 +128,13 @@ export class AddNormalTaskComponent implements OnInit {
 
   selectUser(row) {
     this.selectUserId = row.userId;
-    console.log("userId",row.userId)
+    console.log("userId", row.userId)
     this.close = false;
   }
 
   selectProject(row) {
     this.selectProjectId = row.projectId;
-    console.log("projectId",this.selectProjectId);
+    console.log("projectId", this.selectProjectId);
   }
 
 
@@ -135,7 +149,7 @@ export class AddNormalTaskComponent implements OnInit {
 
   }
 
-  resetTask() {
-    this.addTaskForm.reset();
+  cancel() {
+    this.route.navigate(['project/viewTask']);
   }
 }

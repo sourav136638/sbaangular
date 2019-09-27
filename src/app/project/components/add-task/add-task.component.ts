@@ -39,10 +39,7 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.router.data.subscribe((data) => {
-    //   this.taskModel = data.taskList;
-    //   console.log('list', this.taskModel);
-    // });
+    
   }
 
 }
