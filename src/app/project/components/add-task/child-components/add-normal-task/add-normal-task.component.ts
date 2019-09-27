@@ -26,6 +26,8 @@ export class AddNormalTaskComponent implements OnInit {
   userModel: MatTableDataSource<UserModel>;
   projectModel: MatTableDataSource<ProjectModel>;
 
+  isClick:boolean ;
+  isUserClick:boolean ;
   addTaskForm: FormGroup;
 
   markAsTouched = FormUtils.markAsTouched;
@@ -138,4 +140,11 @@ export class AddNormalTaskComponent implements OnInit {
   resetTask() {
     this.addTaskForm.reset();
   }
+
+  //modal
+  closeModal(event){
+    
+  }
+
+  
 }

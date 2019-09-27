@@ -6,6 +6,8 @@ import { ProjectService } from '../../services/project.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/project/services/user.service';
+import { UserModel } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-add-project',
@@ -14,7 +16,6 @@ import { Subscription } from 'rxjs';
 })
 export class AddProjectComponent implements OnInit {
 
-  projectModel: ProjectModel[];
   addProjectForm: FormGroup;
 
 
@@ -23,24 +24,26 @@ export class AddProjectComponent implements OnInit {
   markAsTouched = FormUtils.markAsTouched;
   isFieldValid = FormUtils.isFieldValid;
   isErrorExists = FormUtils.isErrorExists;
-  dataSource: MatTableDataSource<ProjectModel>
+  userModel: MatTableDataSource<UserModel>;
 
   subscriptions: Subscription[] = [];
   displayedColumns: string[];
   pageLength: number;
- selectManagerId: string;
+  selectManagerId: string;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private formBuilder: FormBuilder, private projectService: ProjectService, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder,
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private router: ActivatedRoute) {
     this.displayedColumns = [
-      'project',
-      'noOfTask',
-      'startdate',
-      'enddate',
-      'completed'
+      'firstName',
+      'lastName',
+      'employeeId',
     ];
 
-    this.dataSource = new MatTableDataSource();
+    this.userModel = new MatTableDataSource();
 
   }
 
@@ -50,6 +53,7 @@ export class AddProjectComponent implements OnInit {
   }
 
   ngOnInit() {
+
 
     if (this.marked) {
       this.addProjectForm = this.formBuilder.group({
@@ -67,12 +71,15 @@ export class AddProjectComponent implements OnInit {
         startdate: [""],
         enddate: [""]
       });
+
+      this.userModel = new MatTableDataSource()
     }
 
-    this.subscriptions.push(this.projectService.projectListDataSubject.asObservable().subscribe((data) => {
-      this.dataSource.data = data;      
+    this.subscriptions.push(this.userService.userListDataSubject.asObservable().subscribe((data) => {
+
+      this.userModel.data = data;
     }));
-    this.dataSource.sort = this.sort;
+    this.userModel.sort = this.sort;
 
   }
 
@@ -85,7 +92,7 @@ export class AddProjectComponent implements OnInit {
   submit() {
     if (this.addProjectForm.valid) {
       let projectModel: ProjectModel = this.addProjectForm.value;
-      this.projectService.createProject(projectModel);     
+      this.projectService.createProject(projectModel);
     } else {
       this.markAsTouched(this.addProjectForm);
     }
@@ -95,9 +102,13 @@ export class AddProjectComponent implements OnInit {
     this.addProjectForm.reset();
   }
 
-  selectManager(row){
-    this.selectManagerId=row.managerId;
-   
+  selectUser(row) {
+    if (!this.selectManagerId) {
+      this.selectManagerId = row.userId;
+      console.log("userId", this.selectManagerId)
+    }
+
+
   }
 
 }

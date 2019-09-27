@@ -1,50 +1,46 @@
 <div class="row">
-    <div class="col-3 mt-5 mb-3 float-right">
+    <div class="col-3 mt-5 mb-3 text-right">
         <div class="input-group">
-            <input autocomplete="off" (keyup)="applyFilter($event.target.value)" type="text"
-                placeholder="Filter" class="form-control">
-            <span class="icon-inside"><i class="fa fa-search"></i></span>
+            <input autocomplete="off" (keyup)="applyFilter($event.target.value)" type="text" placeholder="Filter" class="form-control">
+            <span class="icon-inside">
+                <i class="fa fa-search"></i>
+            </span>
         </div>
     </div>
-</div>
-
-<mat-table #table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="task">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Task</mat-header-cell>
-        <mat-cell *matCellDef="let element" > {{element.task}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="parentTask">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Parent Task </mat-header-cell>
-        <mat-cell *matCellDef="let element" > {{element.parentTask}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="priority">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
-        <mat-cell *matCellDef="let element" > {{element.priority}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="startDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
-        <mat-cell *matCellDef="let element" > {{element.startDate}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="endDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
-        <mat-cell *matCellDef="let element" > {{element.endDate}} </mat-cell>
-    </ng-container>
+    <div class="col-12">
+        <mat-table #table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="task">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Task</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.task}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="parentTask">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Parent Task </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.parentTask}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="priority">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.priority}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="startDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.startDate}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="endDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.endDate}} </mat-cell>
+            </ng-container>
     
-    <ng-container matColumnDef="action">
-        <mat-header-cell *matHeaderCellDef class="p-3 action-col"></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <button class="btn btn-outline-primary font-weight-bold" (click)="editTask(element)">
-                <i class="fa fa-eye mr-2"></i>Edit
-            </button>
-            <button class="btn btn-outline-primary font-weight-bold" (click)="deleteTask(element)">
-                <i class="fa fa-eye mr-2"></i>End Task
-            </button>
-        </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-<mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [showFirstLastButtons]="true" [pageIndex]="0"
-    [length]="pageLength">
-</mat-paginator>
-
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef class="p-3 action-col"></mat-header-cell>
+                <mat-cell *matCellDef="let element" class="action-col">
+                    <button class="btn btn-primary mr-3 float-left" (click)="editTask(element)">Edit</button>
+                    <button class="btn btn-primary float-left" (click)="deleteTask(element)">End Task</button>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" [showFirstLastButtons]="true" [pageIndex]="0" [length]="pageLength">
+        </mat-paginator>
+    </div>
+</div>

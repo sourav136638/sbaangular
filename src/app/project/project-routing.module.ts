@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: 'addProject', component: AddProjectComponent,
     resolve: {
-      projectList: ProjectResolver
+      userList: UserResolver
     }
   },
   {
@@ -47,7 +47,7 @@ const routes: Routes = [
     path: 'editProject', component: UpdateProjectComponent,
     resolve: {
       taskList: TaskResolver,
-      projectList: ProjectResolver
+      userList: UserResolver
     }
   },
   { path: 'editUser', component: UpdateUserComponent },

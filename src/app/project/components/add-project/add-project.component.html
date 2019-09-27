@@ -26,11 +26,20 @@
                 <app-field-error-display [displayError]="isErrorExists(startdate, 'required')" errorMsg="Start Date is required">
                 </app-field-error-display>
             </div>
+        </div>
+        <div class="row mt-2" *ngIf="marked">
             <div class="col-3">
                 <label for="enddate" class="required col-12">End Date:</label>
             </div>
-            <div class="col-3 ">
-                <input class="form-control" id="enddate" formControlName="enddate" [ngClass]="{'is-invalid': isFieldValid(enddate)}" />
+            <div class="col-3">
+                <div class="input-group">
+                    <input class="form-control" id="enddate" formControlName="enddate" [ngClass]="{'is-invalid': isFieldValid(enddate)}" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                            
+                        </button>
+                    </div>
+                </div>
                 <app-field-error-display [displayError]="isErrorExists(enddate, 'required')" errorMsg="End Date is required">
                 </app-field-error-display>
             </div>
@@ -58,17 +67,19 @@
                 </select> -->
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <input class="form-control" id="managerId" formControlName="managerId" [(ngModel)]="selectManagerId" [ngClass]="{'is-invalid': isFieldValid(managerId)}" placeholder="Select Manager"
-                        [value]="selectManagerId" />
-                </button>
-
+                <div class="input-group mb-3">
+                    <input class="form-control" id="managerId" formControlName="managerId" [(ngModel)]="selectUserId" [ngClass]="{'is-invalid': isFieldValid(managerId)}"
+                        placeholder="Select User" [value]="selectManagerId" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Search</button>
+                    </div>
+                </div>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Choose Manager</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Choose User</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -86,29 +97,21 @@
                                     </div>
                                 </div>
 
-                                <mat-table #table [dataSource]="dataSource" matSort>
-                                    <ng-container matColumnDef="project">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.project}} </mat-cell>
+                                <mat-table #table [dataSource]="userModel" matSort>
+                                    <ng-container matColumnDef="firstName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
                                     </ng-container>
-                                    <ng-container matColumnDef="startdate">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.startdate}} </mat-cell>
+                                    <ng-container matColumnDef="lastName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
                                     </ng-container>
-                                    <ng-container matColumnDef="enddate">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.enddate}} </mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="noOfTask">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header> No Of Task </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.noOfTask}} </mat-cell>
-                                    </ng-container>
-                                    <ng-container matColumnDef="completed">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Completed </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{element.completed}} </mat-cell>
+                                    <ng-container matColumnDef="employeeId">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Employee Id </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.employeeId}} </mat-cell>
                                     </ng-container>
                                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectManager(row)" class="arrow-pointer"></mat-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectUser(row)" class="arrow-pointer"></mat-row>
                                 </mat-table>
 
                             </div>

@@ -17,6 +17,8 @@ import { ParentTaskComponent } from './components/add-task/child-components/pare
 import { AddNormalTaskComponent } from './components/add-task/child-components/add-normal-task/add-normal-task.component';
 import { UpdateTaskComponent } from './components/update-task/update-task.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 //import { NgbModule, NgbDateAdapter, NgbNativeDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -27,7 +29,8 @@ import { UpdateTaskComponent } from './components/update-task/update-task.compon
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
   ],
   // providers: [
   //   provide: [{NgbDateAdapter, useclass:NgbNativeDateAdapter}]

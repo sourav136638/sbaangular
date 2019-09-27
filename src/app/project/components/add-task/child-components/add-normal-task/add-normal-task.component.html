@@ -14,25 +14,20 @@
             <div class="col-3 text-right">
                 <label for="projectId" class="required col-12">Project:</label>
             </div>
-            <div class="col-9 ">
-                <!-- <select class="custom-select" id="projectId" formControlName="projectId" [ngClass]="{'is-invalid': isFieldValid(projectId)}">
-                    <option *ngFor="let project of projectNames" [value]="project.id">
-                        {{project.value}}</option>
-                </select> -->
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            <div class="col-9">
+                <div class="input-group mb-3">
                     <input class="form-control" id="projectId" formControlName="projectId" [(ngModel)]="selectProjectId" [ngClass]="{'is-invalid': isFieldValid(projectId)}"
-                        placeholder="Select Project"  [value]="selectProjectId" />
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+                        placeholder="Select Project" [value]="selectProjectId" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#ModalCenter">Search</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Choose Project</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <h5 class="modal-title" id="ModalLongTitle">Choose Project</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -152,16 +147,13 @@
                 <label for="userId" class="required col-12">User:</label>
             </div>
             <div class="col-9 ">
-                <!-- <select class="custom-select" id="userId" formControlName="userId" [ngClass]="{'is-invalid': isFieldValid(userId)}">
-                    <option *ngFor="let user of userModel" [value]="user.userId">
-                        {{user.firstname}}</option>
-                </select> -->
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <input class="form-control" id="userId" formControlName="userId" [(ngModel)]="selectUserId" [ngClass]="{'is-invalid': isFieldValid(userId)}" placeholder="Select User"
-                        [value]="selectUserId" />
-                </button>
-
+                <div class="input-group mb-3">
+                    <input class="form-control" id="userId" formControlName="userId" [(ngModel)]="selectUserId" [ngClass]="{'is-invalid': isFieldValid(userId)}"
+                        placeholder="Select User" [value]="selectUserId" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Search</button>
+                    </div>
+                </div>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
